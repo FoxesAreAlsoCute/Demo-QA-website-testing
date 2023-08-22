@@ -1,5 +1,7 @@
 import pytest
 from pages.textbox_page import TextboxPage
+from pages.checkbox_page import CheckboxPage
+import time
 
 @pytest.mark.textbox_page
 class TestTextboxPage():
@@ -37,3 +39,21 @@ class TestTextboxPage():
         page.should_be_correct_email(self.email)
         page.should_be_correct_current_address(self.current_address)
         page.should_be_correct_permanent_address(self.permanent_address)
+
+
+@pytest.mark.checkbox_page
+class TestCheckboxPage():
+    link = "https://demoqa.com/checkbox"
+
+    @pytest.mark.smoke
+    def test_user_can_access_checkbox_page(self, browser):
+        page = CheckboxPage(browser, self.link)
+        page.open()
+        page.should_be_checkbox_page()
+
+    def test_user_can_see_all_nodes_after_expand_all(self, browser):
+        page = CheckboxPage(browser, self.link)
+        page.open()
+        page.should_be_checkbox_page()
+        page.click_expand_all_button()
+        page.should_be_all_nodes()
