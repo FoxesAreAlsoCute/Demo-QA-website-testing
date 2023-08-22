@@ -107,5 +107,85 @@ class CheckboxPage(BasePage):
     def click_collapse_all_button(self):
         self.click_element(*CheckboxPageLocators.COLLAPSE_ALL_BUTTON)
 
+
     def select_all_nodes(self):
         self.click_element(*CheckboxPageLocators.HOME_NODE)
+
+    def expected_text_present_in_results_array(self, expected_text):
+        arr = self.browser.find_elements(*CheckboxPageLocators.RESULTS)
+        if len(arr) == 0:
+            raise AssertionError (f"There is no any {CheckboxPageLocators.RESULTS}!")
+        for i in arr:
+            if i.text == expected_text:
+                return
+        raise AssertionError(f"There is no '{expected_text}' in results!")
+    
+    def should_be_all_results(self):
+        self.should_be_home_in_results()
+        self.should_be_desktop_in_results()
+        self.should_be_notes_in_results()
+        self.should_be_commands_in_results()
+        self.should_be_documents_in_results()
+        self.should_be_workspace_in_results()
+        self.should_be_react_in_results()
+        self.should_be_angular_in_results()
+        self.should_be_veu_in_results()
+        self.should_be_office_in_results()
+        self.should_be_public_in_results()
+        self.should_be_private_in_results()
+        self.should_be_classified_in_results()
+        self.should_be_general_in_results()
+        self.should_be_downloads_in_results()
+        self.should_be_wordfile_in_results()
+        self.should_be_excelfile_in_results()
+
+    def should_be_home_in_results(self):
+        self.expected_text_present_in_results_array("home")
+
+    def should_be_desktop_in_results(self):
+        self.expected_text_present_in_results_array("desktop")
+    
+    def should_be_notes_in_results(self):
+        self.expected_text_present_in_results_array("notes")
+
+    def should_be_commands_in_results(self):
+        self.expected_text_present_in_results_array("commands")
+        
+    def should_be_documents_in_results(self):
+        self.expected_text_present_in_results_array("documents")
+
+    def should_be_workspace_in_results(self):
+        self.expected_text_present_in_results_array("workspace")
+
+    def should_be_react_in_results(self):
+        self.expected_text_present_in_results_array("react")
+
+    def should_be_angular_in_results(self):
+        self.expected_text_present_in_results_array("angular")
+
+    def should_be_veu_in_results(self):
+        self.expected_text_present_in_results_array("veu")
+
+    def should_be_office_in_results(self):
+        self.expected_text_present_in_results_array("office")
+
+    def should_be_public_in_results(self):
+        self.expected_text_present_in_results_array("public")
+
+    def should_be_private_in_results(self):
+        self.expected_text_present_in_results_array("private")
+
+    def should_be_classified_in_results(self):
+        self.expected_text_present_in_results_array("classified")
+
+    def should_be_general_in_results(self):
+        self.expected_text_present_in_results_array("general")
+
+    def should_be_downloads_in_results(self):
+        self.expected_text_present_in_results_array("downloads")
+
+    def should_be_wordfile_in_results(self):
+        self.expected_text_present_in_results_array("wordFile")
+
+    def should_be_excelfile_in_results(self):
+        self.expected_text_present_in_results_array("excelFile")

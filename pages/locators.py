@@ -33,4 +33,4 @@ class CheckboxPageLocators():
     DOWNLOADS_NODE = (By.CSS_SELECTOR, "[for='tree-node-downloads']")
     WORDFILE_NODE = (By.CSS_SELECTOR, "[for='tree-node-wordFile']")
     EXCELFILE_NODE = (By.CSS_SELECTOR, "[for='tree-node-excelFile']")
-    RESULT = (By.ID, "result")
+    RESULTS = (By.CSS_SELECTOR, "#result .text-success")

@@ -1,7 +1,6 @@
 import pytest
 from pages.textbox_page import TextboxPage
 from pages.checkbox_page import CheckboxPage
-import time
 
 @pytest.mark.textbox_page
 class TestTextboxPage():
@@ -57,3 +56,10 @@ class TestCheckboxPage():
         page.should_be_checkbox_page()
         page.click_expand_all_button()
         page.should_be_all_nodes()
+
+    def test_user_can_select_all_nodes(self, browser):
+        page = CheckboxPage(browser, self.link)
+        page.open()
+        page.should_be_checkbox_page()
+        page.select_all_nodes()
+        page.should_be_all_results()
