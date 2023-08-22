@@ -60,7 +60,7 @@ class BasePage():
     
     def input_text_into_element(self, how, what, inputtext, timeout=4):
         """
-        Try to fill and input field
+        Try to fill an input field
         :param how: requires 'selenium.webdriver.common.by'
         :param what: the unique selector on the element, depends on 'how' parameter
         :param inputtext: the text which must be filled in the input field
