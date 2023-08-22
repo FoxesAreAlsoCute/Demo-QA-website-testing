@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 
 class TextboxPageLocators():
-    """Container for unique locators for the Textbox page object"""
+    """Container for unique locators for the `Textbox` page object"""
     FULL_NAME = (By.ID, "userName")
     EMAIL = (By.ID, "userEmail")
     CURRENT_ADDRESS = (By.ID, "currentAddress")
@@ -14,6 +14,7 @@ class TextboxPageLocators():
     INCORRECT_LOCATOR = (By.CSS_SELECTOR, "INCORRECT_LOCATOR") # For sure that tests work
 
 class CheckboxPageLocators():
+    """Container for unique locators for the `Checkbox` page object"""
     EXPAND_ALL_BUTTON = (By.CLASS_NAME, "rct-option-expand-all")
     COLLAPSE_ALL_BUTTON = (By.CLASS_NAME, "rct-option-collapse-all")
     HOME_NODE = (By.CSS_SELECTOR, "[for='tree-node-home']")

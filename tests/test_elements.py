@@ -14,8 +14,8 @@ class TestTextboxPage():
     @pytest.mark.smoke
     def test_user_can_access_textbox_page(self, browser):
         """
-        Simple get to the page
-        :param browser: an example of selenium.webdriver
+        Simple get to the `Textbox` page
+        :param browser: an example of `selenium.webdriver`
         """
         page = TextboxPage(browser, self.link)
         page.open()
@@ -23,8 +23,8 @@ class TestTextboxPage():
 
     def test_user_can_fill_the_form(self, browser):
         """
-        Fill all the fields with correct data, click 'submit' and check if output matches input
-        :param browser: an example of selenium.webdriver
+        Fill all the fields with correct data, click `submit` and check if output matches input
+        :param browser: an example of `selenium.webdriver`
         """
         page = TextboxPage(browser, self.link)
         page.open()
@@ -42,15 +42,24 @@ class TestTextboxPage():
 
 @pytest.mark.checkbox_page
 class TestCheckboxPage():
+    """Testing the checkbox page via link https://demoqa.com/checkbox"""
     link = "https://demoqa.com/checkbox"
 
     @pytest.mark.smoke
     def test_user_can_access_checkbox_page(self, browser):
+        """
+        Simple get to the `Checkbox` page
+        :param browser: an example of `selenium.webdriver`
+        """
         page = CheckboxPage(browser, self.link)
         page.open()
         page.should_be_checkbox_page()
 
     def test_user_can_see_all_nodes_after_expand_all(self, browser):
+        """
+        Check visibility of all elements after expand completely the dropdown
+        :param browser: an example of `selenium.webdriver`
+        """
         page = CheckboxPage(browser, self.link)
         page.open()
         page.should_be_checkbox_page()
@@ -58,6 +67,10 @@ class TestCheckboxPage():
         page.should_be_all_nodes()
 
     def test_user_can_select_all_nodes(self, browser):
+        """
+        Check if all elements are selected after clicking the `home` node
+        :param browser: an example of `selenium.webdriver`
+        """
         page = CheckboxPage(browser, self.link)
         page.open()
         page.should_be_checkbox_page()

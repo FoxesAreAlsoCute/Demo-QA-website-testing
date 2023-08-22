@@ -3,11 +3,11 @@ from .locators import TextboxPageLocators
 
 class TextboxPage(BasePage):
     """
-    The page object for textbox page in the 'elements' section.\n
-    This is the child class that extends BasePage.
+    The page object for textbox page in the `elements` section.\n
+    This is the child class that extends `BasePage`.
     """
     def should_be_textbox_page(self):
-        """Check if the page is really Textbox page"""
+        """Check if the page is really `TextboxPage`"""
         self.should_be_fullname_field()
         self.should_be_email_field()
         self.should_be_current_address_field()
