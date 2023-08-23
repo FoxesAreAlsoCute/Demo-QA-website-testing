@@ -1,3 +1,4 @@
+"""Containers of unique locators for each page object"""
 from selenium.webdriver.common.by import By
 
 class TextboxPageLocators():

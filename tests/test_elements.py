@@ -1,3 +1,4 @@
+"""The testsuit for `elements` section of the website https://demoqa.com"""
 import pytest
 from pages.textbox_page import TextboxPage
 from pages.checkbox_page import CheckboxPage
