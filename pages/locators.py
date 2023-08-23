@@ -35,3 +35,12 @@ class CheckboxPageLocators():
     WORDFILE_NODE = (By.CSS_SELECTOR, "[for='tree-node-wordFile']")
     EXCELFILE_NODE = (By.CSS_SELECTOR, "[for='tree-node-excelFile']")
     RESULTS = (By.CSS_SELECTOR, "#result .text-success")
+
+class ButtonsPageLocators():
+    """Container for unique locators for the `Buttons` page object"""
+    DOUBLE_CLICK_BUTTON = (By.ID, "doubleClickBtn")
+    RIGHT_CLICK_BUTTON = (By.ID, "rightClickBtn")
+    LEFT_CLICK_BUTTON = (By.CSS_SELECTOR, ".row :last-child button.btn-primary")
+    DOUBLE_CLICK_MESSAGE = (By.ID, "doubleClickMessage")
+    RIGHT_CLICK_MESSAGE = (By.ID, "rightClickMessage")
+    LEFT_CLICK_MESSAGE = (By.ID, "dynamicClickMessage")

@@ -1,6 +1,7 @@
 import pytest
 from pages.textbox_page import TextboxPage
 from pages.checkbox_page import CheckboxPage
+from pages.buttons_page import ButtonsPage
 
 @pytest.mark.textbox_page
 class TestTextboxPage():
@@ -76,3 +77,33 @@ class TestCheckboxPage():
         page.should_be_checkbox_page()
         page.select_all_nodes()
         page.should_be_all_results()
+
+
+@pytest.mark.buttons_page
+class TestButtonsPage():
+    """Testing the buttons page via link https://demoqa.com/buttons"""
+    link = "https://demoqa.com/buttons"
+
+    @pytest.mark.smoke
+    def test_user_can_access_buttons_page(self, browser):
+        page = ButtonsPage(browser, self.link)
+        page.open()
+        page.should_be_buttons_page()
+
+    def test_user_can_use_double_click_button(self, browser):
+        page = ButtonsPage(browser, self.link)
+        page.open()
+        page.should_be_buttons_page()
+        page.use_double_click_button()
+
+    def test_user_can_use_right_click_button(self, browser):
+        page = ButtonsPage(browser, self.link)
+        page.open()
+        page.should_be_buttons_page()
+        page.use_right_click_button()
+
+    def test_user_can_use_left_click_button(self, browser):
+        page = ButtonsPage(browser, self.link)
+        page.open()
+        page.should_be_buttons_page()
+        page.use_left_click_button()

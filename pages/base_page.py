@@ -1,7 +1,7 @@
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.wait import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.select import Select
+from selenium.webdriver.common.action_chains import ActionChains
 from selenium.common.exceptions import NoSuchElementException
 from selenium.common.exceptions import TimeoutException
 
@@ -24,8 +24,8 @@ class BasePage():
     def is_element_present(self, how, what):
         """
         Check if element is present on the page
-        :param how: requires 'selenium.webdriver.common.by'
-        :param what: the unique selector on the element, depends on 'how' parameter
+        :param `how`: requires `selenium.webdriver.common.by`
+        :param `what`: the unique selector on the element, depends on `how` parameter
         """
         try:
             self.browser.find_element(how, what)
@@ -36,9 +36,9 @@ class BasePage():
     def is_not_element_present(self, how, what, timeout=4):
         """
         Check if element is not present on the page
-        :param how: requires 'selenium.webdriver.common.by'
-        :param what: the unique selector on the element, depends on 'how' parameter
-        :param timeout: time to try and find the element on the page
+        :param `how`: requires `selenium.webdriver.common.by`
+        :param `what`: the unique selector on the element, depends on `how` parameter
+        :param `timeout`: time to try and find the element on the page
         """
         try:
             WebDriverWait(self.browser, timeout).until(EC.presence_of_element_located((how, what)))
@@ -49,9 +49,9 @@ class BasePage():
     def is_dissapeared(self, how, what, timeout):
         """
         Check if element is not present on the page any more after some seconds
-        :param how: requires 'selenium.webdriver.common.by'
-        :param what: the unique selector on the element, depends on 'how' parameter
-        :param timeout: time to try and find the element on the page
+        :param `how`: requires `selenium.webdriver.common.by`
+        :param `what`: the unique selector on the element, depends on `how` parameter
+        :param `timeout`: time to try and find the element on the page
         """
         try:
             WebDriverWait(self.browser, timeout).until_not(EC.presence_of_element_located((how, what)))
@@ -62,11 +62,11 @@ class BasePage():
     def input_text_into_element(self, how, what, inputtext, timeout=4):
         """
         Try to fill an input field
-        :param how: requires 'selenium.webdriver.common.by'
-        :param what: the unique selector on the element, depends on 'how' parameter
+        :param `how`: requires `selenium.webdriver.common.by`
+        :param `what`: the unique selector on the element, depends on `how` parameter
         :param inputtext: the text which must be filled in the input field
-        :param timeout: time to try and assure that the element is clickable
-        :raises AssertionError:
+        :param `timeout`: time to try and assure that the element is clickable
+        :raises `AssertionError`:
         """
         try:
             WebDriverWait(self.browser, timeout).until(EC.element_to_be_clickable((how, what))).send_keys(inputtext)
@@ -76,11 +76,11 @@ class BasePage():
     def get_text_from_element(self, how, what, timeout=4):
         """
         Try to get the value of 'text' property
-        :param how: requires 'selenium.webdriver.common.by'
-        :param what: the unique selector on the element, depends on 'how' parameter
-        :param timeout: time to try and assure that the element is clickable
+        :param `how`: requires `selenium.webdriver.common.by`
+        :param `what`: the unique selector on the element, depends on `how` parameter
+        :param `timeout`: time to try and assure that the element is clickable
         :return: string
-        :raises AssertionError:
+        :raises `AssertionError`:
         """
         try:
             text = WebDriverWait(self.browser, timeout).until(EC.visibility_of_element_located((how, what))).text
@@ -91,10 +91,10 @@ class BasePage():
     def scroll_to_element(self, how, what, timeout=4):
         """
         Try to scroll to element
-        :param how: requires 'selenium.webdriver.common.by'
-        :param what: the unique selector on the element, depends on 'how' parameter
-        :param timeout: time to try and assure that the element is clickable
-        :raises AssertionError:
+        :param `how`: requires `selenium.webdriver.common.by`
+        :param `what`: the unique selector on the element, depends on `how` parameter
+        :param `timeout`: time to try and assure that the element is clickable
+        :raises `AssertionError`:
         """
         try:
             element = WebDriverWait(self.browser, timeout).until(EC.presence_of_element_located((how, what)))
@@ -105,13 +105,45 @@ class BasePage():
     def click_element(self, how, what, timeout=4):
         """
         Try to click the element, but at first scroll to it
-        :param how: requires 'selenium.webdriver.common.by'
-        :param what: the unique selector on the element, depends on 'how' parameter
-        :param timeout: time to try and assure that the element is clickable
-        :raises AssertionError:
+        :param `how`: requires `selenium.webdriver.common.by`
+        :param `what`: the unique selector on the element, depends on `how` parameter
+        :param `timeout`: time to try and assure that the element is clickable
+        :raises `AssertionError`:
         """
         try:
             self.scroll_to_element(how, what)
             WebDriverWait(self.browser, timeout).until(EC.element_to_be_clickable((how, what))).click()
         except TimeoutException:
             raise AssertionError(f"Failed to click element: {what}")
+        
+    def double_click_element(self, how, what, timeout=4):
+        """
+        Try to double click the element, but at first scroll to it
+        :param `how`: requires `selenium.webdriver.common.by`
+        :param `what`: the unique selector on the element, depends on `how` parameter
+        :param `timeout`: time to try and assure that the element is clickable
+        :raises `AssertionError`:
+        """
+        try:
+            self.scroll_to_element(how, what)
+            button = WebDriverWait(self.browser, timeout).until(EC.element_to_be_clickable((how, what)))
+            action = ActionChains(self.browser)
+            action.double_click(button).perform()
+        except TimeoutException:
+            raise AssertionError(f"Failed to double click element: {what}")
+        
+    def right_click_element(self, how, what, timeout=4):
+        """
+        Try to right click the element, but at first scroll to it
+        :param `how`: requires `selenium.webdriver.common.by`
+        :param `what`: the unique selector on the element, depends on `how` parameter
+        :param `timeout`: time to try and assure that the element is clickable
+        :raises `AssertionError`:
+        """
+        try:
+            self.scroll_to_element(how, what)
+            button = WebDriverWait(self.browser, timeout).until(EC.element_to_be_clickable((how, what)))
+            action = ActionChains(self.browser)
+            action.context_click(button).perform()
+        except TimeoutException:
+            raise AssertionError(f"Failed to right click element: {what}")
